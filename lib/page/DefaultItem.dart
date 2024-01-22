@@ -9,37 +9,51 @@ class DefaultItem extends StatelessWidget {
   const DefaultItem(
       {super.key, this.name, this.date, this.label, this.content});
 
+  // Color(0xFFECEEF2)
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
-            color: Color(0xFFECEEF2),
-            borderRadius: BorderRadius.all(Radius.circular(10))),
 
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
+    return Container(
+      margin: const EdgeInsets.all(10),
+      child: Material(
+        child: Ink(
+          decoration: const BoxDecoration(
+              color: Color(0xFFECEEF2),
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: InkWell(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            onTap: () {
+              print("tap");
+            },
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(flex: 0, child: DefaultText(name ?? "")),
-                  Expanded(flex: 1, child: DefaultText("")),
-                  Expanded(flex: 0, child: DefaultText(date ?? "")),
+                  Row(
+                    children: [
+                      Expanded(flex: 0, child: DefaultText(name ?? "")),
+                      Expanded(flex: 1, child: DefaultText("")),
+                      Expanded(flex: 0, child: DefaultText(date ?? "")),
+                    ],
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child:
+                        DefaultText(content ?? "", fontWeight: FontWeight.bold),
+                  ),
+                  Row(
+                    children: [DefaultText(label ?? "")],
+                  ),
                 ],
               ),
-              Container(
-                width: double.infinity,
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: DefaultText(content ?? "", fontWeight: FontWeight.bold),
-              ),
-              Row(
-                children: [DefaultText(label ?? "")],
-              ),
-            ],
+            ),
           ),
-      );
+        ),
+      ),
+    );
   }
 }
 
